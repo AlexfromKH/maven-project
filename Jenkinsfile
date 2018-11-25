@@ -1,20 +1,20 @@
 pipeline {
     agent any
 
+    options {
+      buildDiscarder(logRotator(numToKeepStr: '30'))
+    }
+
     stages {
         stage('Init') {
             steps {
-                echo 'Initializing...'
+                sh 'mvn clean package'
             }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building...'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
+            post {
+                success {
+                  echo 'Archiving...'
+                  archiveArtifacts artifacts '**/target/*.war'
+                }
             }
         }
     }
