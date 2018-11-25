@@ -15,7 +15,7 @@ pipeline {
             post {
                 success {
                     echo 'Archiving...'
-                    archiveArtifacts artifacts: '**/*.war'
+                    archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
         }
