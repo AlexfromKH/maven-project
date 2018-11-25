@@ -1,19 +1,21 @@
 pipeline {
-    agent any
+    agent {
+        label 'sony-host'
+    }
 
     options {
-      buildDiscarder(logRotator(numToKeepStr: '30'))
+        buildDiscarder(logRotator(numToKeepStr: '30'))
     }
 
     stages {
-        stage('Init') {
+        stage('Init'){
             steps {
                 sh 'mvn clean package'
             }
             post {
                 success {
-                  echo 'Archiving...'
-                  archiveArtifacts artifacts '**/target/*.war'
+                    echo 'Archiving...'
+                    archiveArtifacts artifacts: '**/*.war'
                 }
             }
         }
