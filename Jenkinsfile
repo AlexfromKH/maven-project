@@ -1,10 +1,9 @@
 pipeline {
-    agent {
-        label 'sony-host'
+    agent any
     }
 
     options {
-        buildDiscarder(logRotator(numToKeepStr: '30'))
+        buildDiscarder(logRotator(numToKeepStr: '5'))
     }
 
     stages {
