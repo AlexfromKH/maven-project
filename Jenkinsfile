@@ -2,13 +2,19 @@
 pipeline {
     agent any
     
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+    
     parameters {
         string(name:'tomcat_dev', defaultValue:'18.195.169.107', description:'dev ec2 instance')
         string(name:'tomcat_prod', defaultValue:'3.120.139.218', description:'dev ec2 instance')
     }
+    
     triggers {
         pollSCM('* * * * *')
     }
+    
     stages {
         stage('Init'){
             steps {
@@ -17,11 +23,11 @@ pipeline {
             post {
                 success {
                     echo 'Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
+                    archiveArtifacts '**/target/*.war'
                 }
             }
         }
-        stage {
+        stage ('deploy to aws'){
             parallel {
                 stage('Deploy to staging'){    
                     steps {
