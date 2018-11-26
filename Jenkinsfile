@@ -23,7 +23,6 @@ pipeline {
                 sh 'pwd'
                 sh 'whoami'
                 sh 'mvn -v'
-                sh 'echo $JAVA_HOME'
                 sh 'mvn clean package'
             }
             post {
