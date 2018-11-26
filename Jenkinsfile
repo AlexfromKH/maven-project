@@ -27,13 +27,13 @@ pipeline {
                     input message: 'Aprove PRODUCTION deployment'
                 build job: 'deploy-to-prod'
             }
-        }
-        post {
-            success {
-                echo 'Successfully deployed'
-            }
-            failure {
-                echo 'Build failed'
+            post {
+                success {
+                    echo 'Successfully deployed'
+                }
+                failure {
+                    echo 'Build failed'
+                }
             }
         }
     }
