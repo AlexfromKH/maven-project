@@ -22,8 +22,8 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'whoami'
-                sh 'mvn -v'
-                sh 'mvn clean package'
+//                sh 'mvn -v'
+//                sh 'mvn clean package'
             }
             post {
                 success {
