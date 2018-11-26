@@ -9,16 +9,29 @@ pipeline {
     triggers {
         pollSCM('* * * * *')
     }
-    stage {
-        parallel {
-            stage('Deploy to staging'){    
-                steps {
-                    sh "scp -i /home/alexst/tomcat.pem **/target/*.war ec2-user@${param.tomcat_dev}:/var/lib/tomcat7/webapps"
+    stages {
+        stage('Init'){
+            steps {
+                sh 'mvn clean package'
+            }
+            post {
+                success {
+                    echo 'Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
-            stage('Deploy to production'){    
-                steps {
-                    sh "scp -i /home/alexst/tomcat.pem **/target/*.war ec2-user@${param.tomcat_prod}:/var/lib/tomcat7/webapps"
+        }
+        stage {
+            parallel {
+                stage('Deploy to staging'){    
+                    steps {
+                        sh "scp -i /home/alexst/tomcat.pem **/target/*.war ec2-user@${param.tomcat_dev}:/var/lib/tomcat7/webapps"
+                    }
+                }
+                stage('Deploy to production'){    
+                    steps {
+                        sh "scp -i /home/alexst/tomcat.pem **/target/*.war ec2-user@${param.tomcat_prod}:/var/lib/tomcat7/webapps"
+                    }
                 }
             }
         }
