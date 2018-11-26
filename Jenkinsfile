@@ -20,6 +20,8 @@ pipeline {
     stages {
         stage('Init'){
             steps {
+                sh 'pwd'
+                sh 'whoami'
                 sh 'mvn clean package'
             }
             post {
