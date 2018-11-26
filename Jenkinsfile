@@ -1,8 +1,7 @@
 // a pipline to deploy on ec2 tomcat containers
 pipeline {
     agent any
-    }
-    
+        
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
