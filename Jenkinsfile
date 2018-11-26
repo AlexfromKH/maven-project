@@ -21,7 +21,7 @@ pipeline {
         stage('Init'){
             steps {
                 sh 'pwd'
-                sh 'whoami'
+//                sh 'whoami'
 //                sh 'mvn -v'
 //                sh 'mvn clean package'
             }
