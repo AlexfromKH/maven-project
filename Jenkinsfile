@@ -1,7 +1,7 @@
 // a pipline to deploy on ec2 tomcat containers
 pipeline {
     agent {
-        node { label 'sony-host' }
+        node { label 'master' }
     }
     
     options {
