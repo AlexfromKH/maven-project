@@ -1,7 +1,6 @@
 // a pipline to deploy on ec2 tomcat containers
 pipeline {
-    agent {
-        node { label 'sony-host' }
+    agent any
     }
     
     options {
@@ -21,9 +20,9 @@ pipeline {
         stage('Init'){
             steps {
                 sh 'pwd'
-//                sh 'whoami'
-//                sh 'mvn -v'
-//                sh 'mvn clean package'
+                sh 'whoami'
+                sh 'mvn -v'
+                sh 'mvn clean package'
             }
             post {
                 success {
