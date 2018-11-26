@@ -1,6 +1,6 @@
 // a pipline to deploy on ec2 tomcat containers
 pipeline {
-    agent any
+    agent { label 'sony-node' }
     
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
