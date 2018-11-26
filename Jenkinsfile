@@ -3,8 +3,8 @@ pipeline {
     agent any
     
     parameters {
-        string(name:tomcat_dev, defaultValue:18.195.169.107, description:'dev ec2 instance')
-        string(name:tomcat_prod, defaultValue:3.120.139.218, description:'dev ec2 instance')
+        string(name:'tomcat_dev', defaultValue:'18.195.169.107', description:'dev ec2 instance')
+        string(name:'tomcat_prod', defaultValue:'3.120.139.218', description:'dev ec2 instance')
     }
     triggers {
         pollSCM('* * * * *')
