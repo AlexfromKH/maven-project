@@ -9,6 +9,7 @@ pipeline {
     parameters {
         string(name:'tomcat_dev', defaultValue:'18.195.169.107', description:'dev ec2 instance')
         string(name:'tomcat_prod', defaultValue:'3.120.139.218', description:'dev ec2 instance')
+        string(name:'tomcat_test', defaultValue:'18.185.18.60', description:'dev ec2 instance')
     }
     
     triggers {
@@ -34,7 +35,7 @@ pipeline {
             parallel {
                 stage('Deploy to staging'){    
                     steps {
-                        sh "scp -i /tmp/tomcat.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
+                        sh "scp -i /tmp/tomcat.pem **/target/*.war ec2-user@${params.tomcat_test}:/var/lib/tomcat/webapps/"
                     }
                 }
                 stage('Deploy to production'){    
