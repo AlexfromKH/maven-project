@@ -8,7 +8,7 @@ pipeline {
     
     parameters {
         string(name:'tomcat_dev', defaultValue:'18.185.85.28', description:'dev ec2 instance')
-        string(name:'tomcat_prod', defaultValue:'3.120.139.218', description:'dev ec2 instance')
+        string(name:'tomcat_prod', defaultValue:'35.159.51.46', description:'dev ec2 instance')
       }
     
     triggers {
@@ -39,8 +39,7 @@ pipeline {
                 }
                 stage('Deploy to production'){    
                     steps {
-                        sh "it works!"
-//                        sh "scp -i /tmp/tomcat.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
+                        sh "scp -i /tmp/tomcat.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat8/webapps"
                     }
                 }
             }
